@@ -63,23 +63,10 @@ export function Scores() {
     };
 
 
-    // useEffect(() => {
-    //     // Replace this with real API fetch
-    //     const mockScores = [
-    //         { username: 'player1', score: 120, timestamp: '2025-06-15T22:10:00Z' },
-    //         { username: 'player2', score: 200, timestamp: '2025-06-15T20:30:00Z' },
-    //         { username: 'nomacover', score: 300, timestamp: '2025-06-15T19:00:00Z' },
-    //     ];
-
-    //     setScores(mockScores);
-    // }, []);
 
     return (
         <>
-            {/* <NavBar /> */}
             <div className='main'>
-
-
 
                 <div className="scores-wrapper">
                     <h1>{username ? `${username}'s` : ''} Leaderboard</h1>                    
@@ -100,13 +87,6 @@ export function Scores() {
                                     <td>{index + 1}</td>
                                     <td>{entry.player1Score}</td>
                                     <td>{entry.player2Score}</td>
-                                    {/* <td>
-                                        {entry.player1Score === entry.player2Score
-                                            ? "Draw"
-                                            : entry.player1Score > entry.player2Score
-                                                ? entry.email.split("@")[0]
-                                                : "Player2"}
-                                    </td> */}
 
                                     <td
                                         className={
