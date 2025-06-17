@@ -133,7 +133,7 @@ export function Game() {
             className={`player player--0 ${activePlayer === 0 ? 'player--active' : ''
               } ${!playing && scores[0] >= 20 ? 'player--winner' : ''}`}
           >
-            <h2 className='name'>Player 1</h2>
+              <h2 className='name'>{username? username : "Player 1"}</h2>
             <p className='score'>{scores[0]}</p>
             <div className='current'>
               <p className='current-label'>Current</p>
