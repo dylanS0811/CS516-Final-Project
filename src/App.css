@@ -249,3 +249,93 @@ main {
   margin-bottom: 3rem;
   text-align: center;
 }
+
+
+/* scores */
+
+.scores-wrapper {
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.score-table {
+  margin: 1rem auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.score-table th,
+.score-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  font-size: 2rem;
+}
+
+.score-table th {
+  background-color: #f4f4f4;
+}
+
+
+/* nav items */
+.nav-item{
+  display: list-item;
+}
+
+
+.navbar {
+  background-color: transparent;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #fff;
+  color: #c7365f;
+}
+
+.active {
+  background-color: #ffffffbe;
+  color: #c7365f !important;
+}
+
+/* ===== GAME LAYOUT ===== */
+.main {
+  position: relative;
+  width: 100rem;
+  /* flex: 100%; */
+  height: 60rem;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(200px);
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+  overflow: hidden;
+  display: flex;
+}
+
+
+.winner-cell {
+  background-color: lightgreen !important;
+}
+
+.draw-cell {
+  background-color: lightgray !important;
+}

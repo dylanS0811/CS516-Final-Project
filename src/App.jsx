@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Game } from './pages/game/Game';
 import { Login } from './pages/login/Login';
 import { useEffect, useState } from 'react';
+import { Scores } from './pages/scores';
+import { NavBar } from './components/NavBar';
+
+
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('id_token'));
@@ -25,10 +29,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/game" element={token ? <Game /> : <Navigate to="/login" replace />} />
-        <Route path="*" element={<Navigate to={token ? '/game' : '/login'} replace />} />
+        <Route element={<NavBar />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/game" element={token ? <Game /> : <Navigate to="/login" replace />} />
+          <Route path="*" element={<Navigate to={token ? '/game' : '/login'} replace />} />
+
+          <Route path="/scores" element={<Scores />} />
+        </Route>
       </Routes>
     </Router>
   );

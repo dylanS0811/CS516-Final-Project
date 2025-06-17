@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import dice1 from '../../assets/dice-1.png'
 import dice2 from '../../assets/dice-2.png'
@@ -7,6 +7,9 @@ import dice4 from '../../assets/dice-4.png'
 import dice5 from '../../assets/dice-5.png'
 import dice6 from '../../assets/dice-6.png'
 import { Feedback } from '../../components/Feedback'
+import parseJwt from '../../utils/jwt-decode'
+
+
 
 export function Game() {
   const [scores, setScores] = useState([0, 0])
@@ -17,10 +20,24 @@ export function Game() {
   const [showFeedback, setShowFeedback] = useState(false)
   const [gameOver, setGameOver] = useState(false)
 
-  const sendFinalScore = async () => {
-    const token = localStorage.getItem('id_token')
-    if (!token) return console.error('🚫 No id_token found.')
+  const [username, setUsername] = useState("Player 1");
+  const [token] = useState(localStorage.getItem('id_token'))
 
+
+  useEffect(() => {
+    if (token) {
+      const decoded = parseJwt(token);
+      if (decoded?.email) {
+        const email = decoded["email"];
+        const namePart = email.split("@")[0];
+        setUsername(namePart);
+      }
+    }
+  }, []);
+
+
+  const sendFinalScore = async () => {
+    if (!token) return console.error('🚫 No id_token found.')
     const payload = {
       player1Score: scores[0],
       player2Score: scores[1],
@@ -37,6 +54,7 @@ export function Game() {
       })
 
       const result = await response.json()
+      alert(result.message)
       console.log('✅ Game saved to DB:', result)
     } catch (err) {
       console.error('❌ Failed to save score:', err)
@@ -112,9 +130,8 @@ export function Game() {
       ) : (
         <>
           <section
-            className={`player player--0 ${
-              activePlayer === 0 ? 'player--active' : ''
-            } ${!playing && scores[0] >= 20 ? 'player--winner' : ''}`}
+            className={`player player--0 ${activePlayer === 0 ? 'player--active' : ''
+              } ${!playing && scores[0] >= 20 ? 'player--winner' : ''}`}
           >
             <h2 className='name'>Player 1</h2>
             <p className='score'>{scores[0]}</p>
@@ -127,9 +144,8 @@ export function Game() {
           </section>
 
           <section
-            className={`player player--1 ${
-              activePlayer === 1 ? 'player--active' : ''
-            } ${!playing && scores[1] >= 20 ? 'player--winner' : ''}`}
+            className={`player player--1 ${activePlayer === 1 ? 'player--active' : ''
+              } ${!playing && scores[1] >= 20 ? 'player--winner' : ''}`}
           >
             <h2 className='name'>Player 2</h2>
             <p className='score'>{scores[1]}</p>
